@@ -1,0 +1,55 @@
+
+
+<form #formularioBuscar="ngForm" (ngSubmit)="getReservasCliente()" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="cedula cliente" name="buscar" aria-label="Search" [(ngModel)]="cedula">      
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+</form>
+
+
+<br/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+        <label for="cedula">Cedula</label>
+        <input type="text" name="cedula" class="form-control" disabled  [(ngModel)]="persona.cedula" > 
+    </div>
+    <div class="col-sm">
+        <label for="nombre">Nombre</label>   
+        <input type="text" name="nombre" name="nombre" class="form-control" disabled [(ngModel)]="persona.nombre"> 
+    </div>
+    <div class="col-sm">
+        <label for="telefono">Telefono</label>   
+        <input type="text" name="telefono" name="telefono" class="form-control" disabled [(ngModel)]="persona.telefono"> 
+    </div>
+    <div class="col-sm">
+        <label for="mail">Mail</label>   
+        <input type="text" name="mail" name="mail" class="form-control" disabled  [(ngModel)]="persona.email"> 
+    </div>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+<table id="tobjetos" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>            
+            <th>Vehiculo</th>
+            <th>Placa</th>
+            <th>Fecha</th>
+            <th>Hora</th>                    
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of reservasCliente">
+        <td style="width: 10%;">{{row.id}}</td>
+        <td style="width: 10%;">{{row.tipo}}</td>
+        <td style="width: 10%;">{{row.placa}}</td>
+        <td style="width: 10%;">{{row.fecha | date:"yyyy-MM-dd"}}</td>
+        <td style="width: 10%;">{{row.hora | date:"HH:mm"}}</td>
+
+      </tr>  
+    </tbody>
+</table>

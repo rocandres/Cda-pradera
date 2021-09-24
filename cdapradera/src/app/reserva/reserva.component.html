@@ -1,0 +1,83 @@
+<br/>
+
+<table id="tobjetos" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>agendar</th>                   
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of disponibilidades">
+        <td style="width: 10%;">{{row.id}}</td>
+        <td >{{row.fecha | date:"yyyy-MM-dd"}}</td>
+        <td >{{row.hora | date:"HH:mm"}}</td>
+        <td class="text-center">
+            <button type="button" class="btn btn-primary" (click)="showForm(row)" data-toggle="modal" data-target="#exampleModal">
+                Agendar
+            </button>
+        </td>
+
+      </tr>  
+    </tbody>
+</table>
+
+<br/>
+<br/>
+
+<div class="alert alert-success" role="alert" [hidden]="banderaGuardar==0">
+  {{respuesta}}
+</div>
+<br/>
+<form #formularioCrear="ngForm" (ngSubmit)="creaReserva()"  [hidden]="bandera==0">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <label for="agenda">Id Agenda</label>
+                <input type="text" name="agenda" class="form-control" disabled  [(ngModel)]="reserva.disponibildad" > 
+            </div>
+            <div class="col-sm">
+                <label for="cedula">Cedula</label>
+                <input type="text" name="cedula" class="form-control"   [(ngModel)]="reserva.cedula" (blur)="consultarPersona(reserva.cedula)" > 
+            </div>
+            <div class="col-sm">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" class="form-control"  [(ngModel)]="reserva.nombre" [readonly]= " this.banderaPersona" > 
+            </div>
+            <div class="col-sm">
+                <label for="telefono">Telefono</label>
+                <input type="text" name="telefono" class="form-control"  [(ngModel)]="reserva.telefono" [readonly]= " this.banderaPersona" > 
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control"    [(ngModel)]="reserva.email" [readonly]= " this.banderaPersona"> 
+            </div>
+            <div class="col-sm">
+                <label for="vehiculo">Vehiculo</label>
+                <select class="form-control " aria-label="Default select example" name="vehiculo"  [(ngModel)]="reserva.vehiculo">
+                    <<option></option>
+                    <option *ngFor="let tv of tipoVehiculos" value="{{tv.id}}">{{ tv.descripcion }}</option>
+                </select>
+            </div>
+            <div class="col-sm">
+                <label for="placa">Placa</label>
+                <input type="text" name="placa" class="form-control"   [(ngModel)]="reserva.placa" > 
+            </div>
+             <div class="col-sm">
+             <br/>
+               <button class="btn btn-primary" type="submit">Agendar</button>
+            </div>
+        </div>
+        
+        
+    </div>
+   
+
+</form>
+
+ 
